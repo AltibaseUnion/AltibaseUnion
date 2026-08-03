@@ -79,20 +79,21 @@ Union Publisher Lite는 Notion Markdown/ZIP을 활동보고 초안으로 변환�
 ## 브랜치 전략
 
 - `main`: 운영 배포용 브랜치입니다.
-- `develop`: 개발 작업용 브랜치입니다.
-- 모든 작업은 develop에서 진행합니다.
+- `develop`: 일반 개발 통합 브랜치입니다.
+- `feature/*`: 기능 단위 작업 브랜치입니다.
+- 큰 기능이나 실험성 작업은 `feature/*`에서 진행하고 PR로 검토합니다.
 - 사용자의 검토 및 승인 전에는 main으로 merge하지 않습니다.
 
 권장 흐름:
 
 ```bash
-git switch develop
-git pull --rebase origin develop
+git switch -c feature/example-work
 npm install
+npm run check
 npm run build
 git add .
 git commit -m "작업 내용"
-git push origin develop
+git push origin feature/example-work
 ```
 
 ## GitHub Pages 배포
@@ -113,11 +114,13 @@ git push origin develop
 
 ## Hero 이미지 교체
 
-Hero 이미지는 다음 파일 하나만 교체하면 됩니다.
+현재 Hero 이미지는 다음 파일을 사용합니다.
 
 ```text
-public/images/hero.png
+public/images/hero-union-participation.webp
 ```
+
+이전 Hero 이미지는 `public/images/hero-previous.png`에 백업되어 있습니다.
 
 권장:
 
@@ -208,6 +211,7 @@ GitHub Pages
 - 디자인 기준: [docs/design-system.md](docs/design-system.md)
 - 콘텐츠 작성 기준: [docs/content-guide.md](docs/content-guide.md)
 - 게시글 작성 실무 가이드: [docs/posting-guide.md](docs/posting-guide.md)
+- Codex 인수인계 문서: [docs/CODEX_HANDOFF.md](docs/CODEX_HANDOFF.md)
 
 ## 이번 구조에서 구현하지 않는 기능
 
