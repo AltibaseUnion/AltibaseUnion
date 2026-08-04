@@ -32,6 +32,17 @@ const { post, sectionLabel, listHref, previousPost, nextPost } = Astro.props;
         <slot />
       </ArticleBody>
 
+      {post.data.attachments?.length > 0 && (
+        <section class="article-attachments" aria-labelledby="attachments-heading">
+          <h2 id="attachments-heading">첨부파일</h2>
+          <ul>
+            {post.data.attachments.map((attachment: { name: string; url: string }) => (
+              <li><a href={attachment.url} download>{attachment.name}</a></li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <ArticleFooter
         tags={post.data.tags}
         listHref={listHref}

@@ -743,6 +743,19 @@ a {
   margin-top: 28px;
 }
 
+.article-attachments {
+  background: var(--union-surface);
+  border: 1px solid var(--union-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  margin-top: 22px;
+  padding: 24px 30px;
+}
+
+.article-attachments h2 { color: var(--union-navy); font-size: 1.2rem; font-weight: 800; }
+.article-attachments ul { margin: 0; padding-left: 1.25rem; }
+.article-attachments a { color: var(--union-blue); font-weight: 700; }
+
 .article-actions {
   display: flex;
   justify-content: center;

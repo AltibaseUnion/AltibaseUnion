@@ -2,7 +2,7 @@
 title: "2026년 5월 활동보고"
 date: 2026-05-31
 category: "활동보고"
-summary: "5월 중 진행한 조합 주요 활동과 현안, 다음 달 주요 일정을 정리하였습니다."
+description: "5월 중 진행한 조합 주요 활동과 현안, 다음 달 주요 일정을 정리하였습니다."
 author: "알티베이스지회"
 thumbnail: ""
 pinned: false
@@ -12,6 +12,9 @@ tags:
   - "5월"
 draft: false
 slug: "may-activity-report"
+period: "2026년 5월"
+year: 2026
+month: 5
 ---
 
 ## 요약

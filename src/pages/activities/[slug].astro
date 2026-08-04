@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ArticleLayout from "../../components/ArticleLayout.astro";
 import { sortPosts } from "../../data/site";
+import { getDescription } from "../../utils/content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("activities", ({ data }) => !data.draft);
@@ -21,7 +22,7 @@ const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
 const nextPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : undefined;
 ---
 
-<BaseLayout title={post.data.title} description={post.data.summary}>
+<BaseLayout title={post.data.title} description={getDescription(post.data)}>
   <ArticleLayout
     post={post}
     sectionLabel="활동보고"

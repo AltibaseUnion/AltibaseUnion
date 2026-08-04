@@ -1,23 +1,24 @@
 ---
 import ArticleMeta from "./ArticleMeta.astro";
+import { getAssetUrl, getDescription } from "../utils/content";
 
 interface Props {
   post: any;
 }
 
 const { post } = Astro.props;
-const thumbnail = post.data.thumbnail;
+const thumbnail = getAssetUrl(post.data.thumbnail);
 ---
 
 <header class="article-header">
   <span class="article-badge">{post.data.category}</span>
   <h1>{post.data.title}</h1>
   <ArticleMeta author={post.data.author} date={post.data.date} tags={post.data.tags} />
-  <p>{post.data.summary}</p>
+  <p>{getDescription(post.data)}</p>
 </header>
 
 {thumbnail && (
   <figure class="article-hero-image">
-    <img src={thumbnail} alt="" loading="lazy" />
+    <img src={thumbnail} alt={post.data.thumbnailAlt || `${post.data.title} 대표 이미지`} loading="lazy" />
   </figure>
 )}
