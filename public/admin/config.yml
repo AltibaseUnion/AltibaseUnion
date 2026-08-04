@@ -12,6 +12,8 @@ locale: ko
 site_url: https://altibaseunion.github.io/AltibaseUnion/
 display_url: https://altibaseunion.github.io/AltibaseUnion/
 logo_url: /AltibaseUnion/images/logo.png
+media_folder: public/images/uploads
+public_folder: /AltibaseUnion/images/uploads
 collections:
   - name: notices
     label: 공지사항
