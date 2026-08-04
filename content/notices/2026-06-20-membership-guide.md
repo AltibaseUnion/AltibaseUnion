@@ -1,11 +1,12 @@
 ---
 title: "노동조합 가입 및 문의 절차 안내"
 date: 2026-06-20
-category: "공지사항"
-summary: "Altibase 노동조합 가입과 문의 절차를 안내합니다."
+category: "공지"
+description: "Altibase 노동조합 가입과 문의 절차를 안내합니다."
 author: "Altibase 노동조합"
 thumbnail: ""
-pinned: false
+important: false
+attachments: []
 tags: ["가입", "문의"]
 draft: false
 slug: "membership-guide"

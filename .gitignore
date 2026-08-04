@@ -2,6 +2,7 @@ node_modules/
 dist/
 .astro/
 imports/
+workers/cms-oauth/.dev.vars
 
 .DS_Store
 Thumbs.db

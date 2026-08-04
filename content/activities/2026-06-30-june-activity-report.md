@@ -2,7 +2,7 @@
 title: "2026년 6월 활동보고"
 date: 2026-06-30
 category: "활동보고"
-summary: "부당노동행위 대응, 정기 노사협의회, 조합 교육과 연대 활동 등 6월 지회 활동을 보고합니다."
+description: "부당노동행위 대응, 정기 노사협의회, 조합 교육과 연대 활동 등 6월 지회 활동을 보고합니다."
 author: "Altibase 노동조합"
 thumbnail: ""
 pinned: true
@@ -12,6 +12,9 @@ tags:
   - "노사협의회"
 draft: false
 slug: "june-activity-report"
+period: "2026년 6월"
+year: 2026
+month: 6
 ---
 
 ## 6월 주요 성과

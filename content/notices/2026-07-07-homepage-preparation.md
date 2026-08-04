@@ -1,11 +1,12 @@
 ---
 title: "Altibase 노동조합 홈페이지를 준비하고 있습니다"
 date: 2026-07-07
-category: "공지사항"
-summary: "조합원과의 안정적인 소통을 위한 공식 홈페이지를 준비하고 있습니다."
+category: "공지"
+description: "조합원과의 안정적인 소통을 위한 공식 홈페이지를 준비하고 있습니다."
 author: "Altibase 노동조합"
 thumbnail: ""
-pinned: false
+important: false
+attachments: []
 tags: ["홈페이지", "소통"]
 draft: false
 slug: "homepage-preparation"

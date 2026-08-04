@@ -80,6 +80,13 @@ const description = Astro.props.description || siteConfig.description;
         if (window.lucide) {
           window.lucide.createIcons();
         }
+
+        document.querySelectorAll("a[href^='http']").forEach((link) => {
+          if (link.origin !== window.location.origin) {
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+          }
+        });
       });
     </script>
   </body>

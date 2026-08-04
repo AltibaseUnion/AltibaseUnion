@@ -1,11 +1,12 @@
 ---
 title: "노동조합 홈페이지 운영 안내"
 date: 2026-07-08
-category: "공지사항"
-summary: "Altibase 노동조합 홈페이지의 게시글 운영 방식과 향후 관리 방향을 안내합니다."
+category: "공지"
+description: "Altibase 노동조합 홈페이지의 게시글 운영 방식과 향후 관리 방향을 안내합니다."
 author: "Altibase 노동조합"
 thumbnail: ""
-pinned: true
+important: true
+attachments: []
 tags: ["홈페이지", "운영"]
 draft: false
 slug: "labor-board"

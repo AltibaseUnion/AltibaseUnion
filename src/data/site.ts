@@ -48,10 +48,12 @@ export const formatDate = (date: Date) =>
     day: "2-digit"
   }).format(date);
 
-export const sortPosts = <T extends { data: { date: Date; pinned: boolean } }>(posts: T[]) =>
+export const sortPosts = <T extends { data: { date: Date; important?: boolean; pinned?: boolean } }>(posts: T[]) =>
   [...posts].sort((a, b) => {
-    if (a.data.pinned !== b.data.pinned) {
-      return a.data.pinned ? -1 : 1;
+    const aImportant = a.data.important ?? a.data.pinned ?? false;
+    const bImportant = b.data.important ?? b.data.pinned ?? false;
+    if (aImportant !== bImportant) {
+      return aImportant ? -1 : 1;
     }
 
     return b.data.date.getTime() - a.data.date.getTime();

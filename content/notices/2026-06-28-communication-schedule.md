@@ -1,11 +1,12 @@
 ---
 title: "정기 소통 일정 및 참여 방법 안내"
 date: 2026-06-28
-category: "공지사항"
-summary: "조합원 정기 소통 일정과 참여 방법을 안내합니다."
+category: "공지"
+description: "조합원 정기 소통 일정과 참여 방법을 안내합니다."
 author: "Altibase 노동조합"
 thumbnail: ""
-pinned: false
+important: false
+attachments: []
 tags: ["소통", "참여"]
 draft: false
 slug: "communication-schedule"

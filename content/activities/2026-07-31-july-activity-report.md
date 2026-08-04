@@ -2,7 +2,7 @@
 title: "2026년 7월 활동보고"
 date: 2026-07-31
 category: "활동보고"
-summary: "노사발전사업 워크숍과 연대 활동, 부당노동행위 대응, 9기 임원 선거 준비 등 7월 지회 활동을 보고합니다."
+description: "노사발전사업 워크숍과 연대 활동, 부당노동행위 대응, 9기 임원 선거 준비 등 7월 지회 활동을 보고합니다."
 author: "Altibase 노동조합"
 thumbnail: ""
 pinned: true
@@ -12,6 +12,9 @@ tags:
   - "부당노동행위"
 draft: false
 slug: "july-activity-report"
+period: "2026년 7월"
+year: 2026
+month: 7
 ---
 
 ## 7월 주요 성과
