@@ -5,7 +5,7 @@
 ## 운영 사이트
 
 ```text
-https://altibaseunion.github.io/altibase-union-homepage/
+https://altibaseunion.github.io/AltibaseUnion/
 ```
 
 ## 배포 방식
@@ -21,7 +21,7 @@ Workflow:
 Astro base path:
 
 ```text
-/altibase-union-homepage
+/AltibaseUnion
 ```
 
 ## 브랜치
@@ -51,7 +51,7 @@ npm run dev
 접속:
 
 ```text
-http://localhost:4321/altibase-union-homepage/
+http://localhost:4321/AltibaseUnion/
 ```
 
 ## 검증

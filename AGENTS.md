@@ -103,5 +103,5 @@ http://localhost:4177
 운영 사이트:
 
 ```text
-https://altibaseunion.github.io/altibase-union-homepage/
+https://altibaseunion.github.io/AltibaseUnion/
 ```

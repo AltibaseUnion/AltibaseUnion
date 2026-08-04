@@ -5,7 +5,7 @@ Altibase Union 홈페이지는 Altibase 공식 홈페이지와 톤을 맞춘 노
 운영 사이트:
 
 ```text
-https://altibaseunion.github.io/altibase-union-homepage/
+https://altibaseunion.github.io/AltibaseUnion/
 ```
 
 ## 기술 스택
