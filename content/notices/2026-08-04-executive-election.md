@@ -10,7 +10,7 @@ tags:
 important: true
 thumbnailAlt: 2026년 9기 임원 선거
 attachments: []
-draft: true
+draft: false
 ---
 **알티베이스지회 9기 임원 선거 예정**
 
