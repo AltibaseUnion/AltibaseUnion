@@ -8,7 +8,7 @@ category: 공지
 tags:
   - 임원선거
 important: true
-thumbnail: /AltibaseUnion/images/uploads/notices/element5-digital-t9cxbzluvic-unsplash.jpg
+thumbnail: ""
 thumbnailAlt: 2026년 9기 임원 선거
 attachments: []
 draft: false
