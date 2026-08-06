@@ -19,6 +19,6 @@ const thumbnail = getAssetUrl(post.data.thumbnail);
 
 {thumbnail && (
   <figure class="article-hero-image">
-    <img src={thumbnail} alt={post.data.thumbnailAlt || `${post.data.title} 대표 이미지`} loading="lazy" />
+    <img src={thumbnail} alt={post.data.thumbnailAlt || post.data.title} loading="lazy" />
   </figure>
 )}
