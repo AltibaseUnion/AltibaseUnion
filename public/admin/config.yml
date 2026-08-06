@@ -26,7 +26,7 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
     preview_path: "notices/{{fields.slug}}/"
     preview_path_date_field: date
-    media_folder: public/images/uploads/notices
+    media_folder: /public/images/uploads/notices
     public_folder: /AltibaseUnion/images/uploads/notices
     summary: "{{title}} · {{date}}"
     sortable_fields: [date, title, important, draft]
@@ -52,7 +52,7 @@ collections:
         default: []
         fields:
           - { label: 표시 이름, name: name, widget: string }
-          - { label: 파일, name: url, widget: file, media_folder: public/files/notices, public_folder: /AltibaseUnion/files/notices }
+          - { label: 파일, name: url, widget: file, media_folder: /public/files/notices, public_folder: /AltibaseUnion/files/notices }
       - { label: 초안, name: draft, widget: boolean, default: true, hint: 게시 전까지 켜 두십시오. }
       - { label: 본문, name: body, widget: markdown }
 
@@ -66,7 +66,7 @@ collections:
     format: frontmatter
     slug: "{{fields.slug}}"
     preview_path: "activities/{{fields.slug}}/"
-    media_folder: public/images/uploads/activity-reports
+    media_folder: /public/images/uploads/activity-reports
     public_folder: /AltibaseUnion/images/uploads/activity-reports
     summary: "{{period}} · {{title}}"
     sortable_fields: [date, title, year, month, draft]
