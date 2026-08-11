@@ -9,7 +9,7 @@ important: false
 attachments:
   - url: /AltibaseUnion/files/notices/9기_임원_대의원_선거-임원및대의원실시공고-.pdf
     name: 제 9대 임원 및 대의원 선거 실시 공고
-draft: true
+draft: false
 ---
 화섬식품노조 수도권지부 알티베이스지회는 조합 규정에따라 제9대 지회 임원 및 대의원 선거를 다음과 같이 실시합니다.
 
