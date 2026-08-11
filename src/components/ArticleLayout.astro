@@ -10,9 +10,10 @@ interface Props {
   listHref: string;
   previousPost?: any;
   nextPost?: any;
+  hasBody?: boolean;
 }
 
-const { post, sectionLabel, listHref, previousPost, nextPost } = Astro.props;
+const { post, sectionLabel, listHref, previousPost, nextPost, hasBody = true } = Astro.props;
 ---
 
 <article class="article-page">
@@ -28,9 +29,11 @@ const { post, sectionLabel, listHref, previousPost, nextPost } = Astro.props;
 
       <ArticleHeader post={post} />
 
-      <ArticleBody>
-        <slot />
-      </ArticleBody>
+      {hasBody && (
+        <ArticleBody>
+          <slot />
+        </ArticleBody>
+      )}
 
       {post.data.attachments?.length > 0 && (
         <section class="article-attachments" aria-labelledby="attachments-heading">
