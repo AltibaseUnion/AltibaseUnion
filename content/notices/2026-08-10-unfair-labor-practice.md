@@ -7,7 +7,7 @@ category: 공지
 tags:
   - 부당노동행위
 important: false
-thumbnail: ""
+thumbnail: /AltibaseUnion/images/uploads/notices/부당노동행위_웹자보.png
 attachments: []
 draft: false
 ---
