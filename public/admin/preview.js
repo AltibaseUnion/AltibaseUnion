@@ -5,16 +5,18 @@
 
   function Preview({ entry, widgetFor, getAsset }) {
     const thumbnail = value(entry, "thumbnail");
+    const description = value(entry, "description");
+    const body = value(entry, "body");
     const attachments = value(entry, "attachments")?.toJS?.() || [];
     return h("article", { className: "cms-article" },
       h("header", { className: "cms-header" },
         h("span", { className: "cms-badge" }, value(entry, "category")),
         h("h1", null, value(entry, "title", "제목")),
         h("div", { className: "cms-meta" }, value(entry, "date"), value(entry, "updatedDate") ? ` · 수정 ${value(entry, "updatedDate")}` : ""),
-        h("p", { className: "cms-description" }, value(entry, "description"))
+        description && h("p", { className: "cms-description" }, description)
       ),
       thumbnail && h("img", { className: "cms-hero", src: assetUrl(getAsset, thumbnail), alt: value(entry, "thumbnailAlt") || value(entry, "title") }),
-      h("div", { className: "cms-body" }, widgetFor("body")),
+      body && h("div", { className: "cms-body" }, widgetFor("body")),
       attachments.length > 0 && h("section", { className: "cms-attachments" },
         h("h2", null, "첨부파일"),
         h("ul", null, attachments.map((item, index) => h("li", { key: index }, h("a", { href: assetUrl(getAsset, item.url) }, item.name))))

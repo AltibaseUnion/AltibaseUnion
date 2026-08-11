@@ -22,13 +22,14 @@ const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
 const nextPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : undefined;
 ---
 
-<BaseLayout title={post.data.title} description={getDescription(post.data)}>
+<BaseLayout title={post.data.title} description={getDescription(post.data) || post.data.title}>
   <ArticleLayout
     post={post}
     sectionLabel="공지사항"
     listHref={`${import.meta.env.BASE_URL}notices/`}
     previousPost={previousPost}
     nextPost={nextPost}
+    hasBody={post.body.trim().length > 0}
   >
     <Content />
   </ArticleLayout>

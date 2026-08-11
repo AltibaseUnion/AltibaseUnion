@@ -8,13 +8,14 @@ interface Props {
 
 const { post } = Astro.props;
 const thumbnail = getAssetUrl(post.data.thumbnail);
+const description = getDescription(post.data);
 ---
 
 <header class="article-header">
   <span class="article-badge">{post.data.category}</span>
   <h1>{post.data.title}</h1>
   <ArticleMeta author={post.data.author} date={post.data.date} tags={post.data.tags} />
-  <p>{getDescription(post.data)}</p>
+  {description && <p>{description}</p>}
 </header>
 
 {thumbnail && (

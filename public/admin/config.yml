@@ -32,7 +32,7 @@ collections:
     sortable_fields: [date, title, important, draft]
     fields:
       - { label: 제목, name: title, widget: string }
-      - { label: 요약, name: description, widget: text }
+      - { label: 요약, name: description, widget: text, required: false, hint: 웹자보처럼 대표 이미지만 게시할 때는 비워도 됩니다. }
       - { label: 게시일, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD }
       - { label: 수정일, name: updatedDate, widget: datetime, required: false, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD }
       - label: URL 영문 이름
@@ -54,7 +54,7 @@ collections:
           - { label: 표시 이름, name: name, widget: string }
           - { label: 파일, name: url, widget: file, media_folder: /public/files/notices, public_folder: /AltibaseUnion/files/notices }
       - { label: 초안, name: draft, widget: boolean, default: true, hint: 게시 전까지 켜 두십시오. }
-      - { label: 본문, name: body, widget: markdown }
+      - { label: 본문, name: body, widget: markdown, required: false, hint: 웹자보처럼 대표 이미지만 게시할 때는 비워도 됩니다. }
 
   - name: activities
     label: 월별 활동보고

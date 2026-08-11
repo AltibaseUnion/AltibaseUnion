@@ -21,8 +21,6 @@ const noticeSchema = commonPostSchema.extend({
   important: z.boolean().optional(),
   pinned: z.boolean().optional(),
   attachments: z.array(z.object({ name: z.string(), url: z.string() })).optional().default([])
-}).refine((data) => Boolean(data.description || data.summary), {
-  message: "description 또는 기존 summary가 필요합니다."
 });
 
 const activitySchema = commonPostSchema.extend({
