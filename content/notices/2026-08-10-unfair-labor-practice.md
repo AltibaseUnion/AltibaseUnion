@@ -7,7 +7,7 @@ category: 공지
 tags:
   - 부당노동행위
 important: false
-thumbnail: /AltibaseUnion/images/uploads/notices/chatgpt-image-2026년-8월-11일-오후-01_22_20.png
+thumbnail: ""
 attachments: []
 draft: false
 ---
