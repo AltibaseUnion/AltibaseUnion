@@ -68,3 +68,11 @@ Decap GitHub backend가 요구하는 proxy 경로는 `/auth`와 `/callback`입�
 - 배포 실패: Actions 빌드 로그와 frontmatter 필수 필드(요약, 날짜, slug, 활동보고 연·월)를 확인합니다.
 
 로컬에서 CMS UI만 확인할 때는 `npx decap-server`와 `local_backend: true`를 별도 임시 설정으로 사용할 수 있지만 운영 `config.yml`에는 인증 우회 설정을 넣지 않습니다.
+
+## 11. 초안과 게시 상태
+
+콘텐츠 공개 여부는 Decap CMS의 편집 워크플로로 관리합니다. 별도의 `초안` 스위치는 관리자 화면에 표시하지 않습니다.
+
+- `준비됨`과 `검토 준비` 상태의 콘텐츠는 CMS 작업 브랜치에만 저장되어 운영 홈페이지에 노출되지 않습니다.
+- `게시`를 실행하면 CMS가 frontmatter의 `draft` 값을 자동으로 `false`로 바꾼 뒤 `main`에 반영합니다.
+- 기존 콘텐츠에 `draft: true`가 남아 있더라도 다시 게시하면 자동으로 공개 상태로 정리됩니다.

@@ -29,7 +29,7 @@ collections:
     media_folder: /public/images/uploads/notices
     public_folder: /AltibaseUnion/images/uploads/notices
     summary: "{{title}} · {{date}}"
-    sortable_fields: [date, title, important, draft]
+    sortable_fields: [date, title, important]
     fields:
       - { label: 제목, name: title, widget: string }
       - { label: 요약, name: description, widget: text, required: false, hint: 웹자보처럼 대표 이미지만 게시할 때는 비워도 됩니다. }
@@ -53,7 +53,7 @@ collections:
         fields:
           - { label: 표시 이름, name: name, widget: string }
           - { label: 파일, name: url, widget: file, media_folder: /public/files/notices, public_folder: /AltibaseUnion/files/notices }
-      - { label: 초안, name: draft, widget: boolean, default: true, hint: 게시 전까지 켜 두십시오. }
+      - { label: 초안, name: draft, widget: hidden, default: false }
       - { label: 본문, name: body, widget: markdown, required: false, hint: 웹자보처럼 대표 이미지만 게시할 때는 비워도 됩니다. }
 
   - name: activities
@@ -69,7 +69,7 @@ collections:
     media_folder: /public/images/uploads/activity-reports
     public_folder: /AltibaseUnion/images/uploads/activity-reports
     summary: "{{period}} · {{title}}"
-    sortable_fields: [date, title, year, month, draft]
+    sortable_fields: [date, title, year, month]
     fields:
       - { label: 제목, name: title, widget: string }
       - { label: 요약, name: description, widget: text }
@@ -87,5 +87,5 @@ collections:
       - { label: 태그, name: tags, widget: list, required: false, default: [] }
       - { label: 대표 이미지, name: thumbnail, widget: image, required: false }
       - { label: 대표 이미지 대체텍스트, name: thumbnailAlt, widget: string, required: false, hint: 비워두면 제목을 사용합니다. }
-      - { label: 초안, name: draft, widget: boolean, default: true, hint: 게시 전까지 켜 두십시오. }
+      - { label: 초안, name: draft, widget: hidden, default: false }
       - { label: 본문, name: body, widget: markdown }

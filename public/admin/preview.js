@@ -27,4 +27,8 @@
   CMS.registerPreviewStyle("./preview.css");
   CMS.registerPreviewTemplate("notices", Preview);
   CMS.registerPreviewTemplate("activities", Preview);
+  CMS.registerEventListener({
+    name: "prePublish",
+    handler: ({ entry }) => entry.get("data").set("draft", false)
+  });
 })();
