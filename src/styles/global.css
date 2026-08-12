@@ -674,6 +674,14 @@ a {
   padding: 14px 18px;
 }
 
+.article-body blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.article-body .article-align-center {
+  text-align: center;
+}
+
 .article-body code {
   background: #eef4ff;
   border: 1px solid rgba(23, 78, 166, 0.12);

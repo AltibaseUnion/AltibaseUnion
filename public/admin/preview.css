@@ -10,6 +10,8 @@ h1 { font-size:40px; line-height:1.22; margin:20px 0 12px; }
 .cms-meta,.cms-description { color:var(--muted); line-height:1.8; }
 .cms-hero { border-radius:10px; display:block; margin:0 0 22px; max-width:100%; width:100%; }
 .cms-body { font-size:18px; line-height:1.85; }
+.cms-body blockquote > :last-child { margin-bottom:0; }
+.cms-body .article-align-center { text-align:center; }
 .cms-body img { border-radius:8px; height:auto; max-width:100%; }
 .cms-body a,.cms-attachments a { color:var(--blue); }
 .cms-attachments { margin-top:22px; }
