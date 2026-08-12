@@ -2,6 +2,18 @@
   const h = window.h;
   const value = (entry, name, fallback = "") => entry.getIn(["data", name], fallback);
   const assetUrl = (getAsset, path) => path ? getAsset(path).toString() : "";
+  const escapeHtml = (text) => String(text ?? "").replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+  const decodeHtml = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = text;
+    return textarea.value;
+  };
 
   function Preview({ entry, widgetFor, getAsset }) {
     const thumbnail = value(entry, "thumbnail");
@@ -25,6 +37,17 @@
   }
 
   CMS.registerPreviewStyle("./preview.css");
+  CMS.registerEditorComponent({
+    id: "centered-text",
+    label: "가운데 정렬 문구",
+    fields: [
+      { name: "text", label: "문구", widget: "string" }
+    ],
+    pattern: /^<p class="article-align-center">([\s\S]*?)<\/p>$/m,
+    fromBlock: (match) => ({ text: decodeHtml(match[1]) }),
+    toBlock: ({ text }) => `<p class="article-align-center">${escapeHtml(text)}</p>`,
+    toPreview: ({ text }) => h("p", { className: "article-align-center" }, text)
+  });
   CMS.registerPreviewTemplate("notices", Preview);
   CMS.registerPreviewTemplate("activities", Preview);
   CMS.registerEventListener({

@@ -54,7 +54,7 @@ collections:
           - { label: 표시 이름, name: name, widget: string }
           - { label: 파일, name: url, widget: file, media_folder: /public/files/notices, public_folder: /AltibaseUnion/files/notices }
       - { label: 초안, name: draft, widget: hidden, default: false }
-      - { label: 본문, name: body, widget: markdown, required: false, hint: 웹자보처럼 대표 이미지만 게시할 때는 비워도 됩니다. }
+      - { label: 본문, name: body, widget: markdown, required: false, hint: 웹자보처럼 대표 이미지만 게시할 때는 비워도 됩니다. 공고문의 '- 다 음 -' 같은 문구는 편집 도구의 '가운데 정렬 문구'를 사용하세요. }
 
   - name: activities
     label: 월별 활동보고
@@ -88,4 +88,4 @@ collections:
       - { label: 대표 이미지, name: thumbnail, widget: image, required: false }
       - { label: 대표 이미지 대체텍스트, name: thumbnailAlt, widget: string, required: false, hint: 비워두면 제목을 사용합니다. }
       - { label: 초안, name: draft, widget: hidden, default: false }
-      - { label: 본문, name: body, widget: markdown }
+      - { label: 본문, name: body, widget: markdown, hint: 가운데 정렬이 필요한 짧은 문구는 편집 도구의 '가운데 정렬 문구'를 사용하세요. }
