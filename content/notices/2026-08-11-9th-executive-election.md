@@ -4,7 +4,8 @@ description: 제 9대 임원 및 대의원 선거 실시 공고
 date: 2026-08-12
 slug: 9th-executive-election
 category: 공지
-tags: []
+tags:
+  - 임원선거
 important: true
 attachments:
   - url: /AltibaseUnion/files/notices/9기_임원_대의원_선거-임원및대의원실시공고-.pdf

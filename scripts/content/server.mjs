@@ -137,14 +137,13 @@ function slugify(title, date) {
   return `${date}-${ascii || "activity-report"}-${hash}`.slice(0, 80);
 }
 
-function suggestTags(markdown, date) {
-  const tags = new Set(["활동보고", date.slice(0, 4)]);
-  const month = Number(date.slice(5, 7));
-  tags.add(`${month}월`);
-  ["노사협의회", "부당노동행위", "교육", "간담회", "연대", "위원회"].forEach((keyword) => {
-    if (markdown.includes(keyword)) tags.add(keyword);
-  });
-  return [...tags];
+function suggestTags(markdown) {
+  const tagRules = [
+    ["노사협의회", ["노사협의회"]], ["부당노동행위", ["부당노동행위"]],
+    ["교육", ["교육"]], ["소통", ["간담회", "소통"]], ["연대활동", ["연대", "연대활동"]],
+    ["임원선거", ["임원 선거", "임원선거"]], ["근무환경", ["근무환경", "노동조건"]], ["조합운영", ["위원회", "운영"]]
+  ];
+  return tagRules.filter(([, keywords]) => keywords.some((keyword) => markdown.includes(keyword))).map(([tag]) => tag).slice(0, 3);
 }
 
 function toYamlArray(values) {

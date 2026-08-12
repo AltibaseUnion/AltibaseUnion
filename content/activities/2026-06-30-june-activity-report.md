@@ -7,9 +7,9 @@ author: "Altibase 노동조합"
 thumbnail: ""
 pinned: true
 tags:
-  - "활동보고"
-  - "6월"
   - "노사협의회"
+  - "부당노동행위"
+  - "교육"
 draft: false
 slug: "june-activity-report"
 period: "2026년 6월"

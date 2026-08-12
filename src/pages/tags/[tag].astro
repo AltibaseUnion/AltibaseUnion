@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TagList from "../../components/TagList.astro";
+import { formatDate } from "../../data/site";
+import { getDescription, getPostUrl } from "../../utils/content";
+export async function getStaticPaths() {
+  const posts = [...await getCollection("notices", ({ data }) => !data.draft), ...await getCollection("activities", ({ data }) => !data.draft)];
+  return [...new Set(posts.flatMap((post) => post.data.tags))].map((tag) => ({ params: { tag }, props: { tag, posts } }));
+}
+const { tag, posts } = Astro.props;
+const matchingPosts = posts.filter((post: any) => post.data.tags.includes(tag)).sort((a: any, b: any) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout title={`#${tag}`} description={`${tag} 태그가 붙은 Altibase 노동조합 게시물`}>
+  <section class="page-header"><div class="container"><p class="section-eyebrow">TAG</p><h1>#{tag}</h1><p>관련 게시물 {matchingPosts.length}건을 확인할 수 있습니다.</p></div></section>
+  <section class="section-pad"><div class="container"><div class="tag-results">{matchingPosts.map((post: any) => (
+    <article class="tag-result-card"><div class="content-meta"><span>{post.data.category}</span><span aria-hidden="true">·</span><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time></div>
+      <h2><a href={getPostUrl(post.collection, post.data.slug)}>{post.data.title}</a></h2>{getDescription(post.data) && <p>{getDescription(post.data)}</p>}<TagList tags={post.data.tags} />
+    </article>
+  ))}</div></div></section>
+</BaseLayout>

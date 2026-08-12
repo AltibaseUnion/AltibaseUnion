@@ -7,9 +7,7 @@ author: "알티베이스지회"
 thumbnail: ""
 pinned: false
 tags:
-  - "활동보고"
-  - "2026"
-  - "5월"
+  - "조합운영"
 draft: false
 slug: "may-activity-report"
 period: "2026년 5월"

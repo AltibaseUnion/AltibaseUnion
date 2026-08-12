@@ -2,13 +2,15 @@
 interface Props {
   tags: string[];
   label?: string;
+  linked?: boolean;
 }
 
-const { tags, label = "태그" } = Astro.props;
+import { getTagUrl } from "../utils/content";
+const { tags, label = "태그", linked = true } = Astro.props;
 ---
 
 {tags?.length > 0 && (
   <div class="tag-list" aria-label={label}>
-    {tags.map((tag) => <span class="tag-badge">{tag}</span>)}
+    {tags.map((tag) => linked ? <a class="tag-badge" href={getTagUrl(tag)}>#{tag}</a> : <span class="tag-badge">#{tag}</span>)}
   </div>
 )}

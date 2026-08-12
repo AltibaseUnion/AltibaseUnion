@@ -3,6 +3,7 @@ import ArticleBody from "./ArticleBody.astro";
 import ArticleFooter from "./ArticleFooter.astro";
 import ArticleHeader from "./ArticleHeader.astro";
 import Breadcrumb from "./Breadcrumb.astro";
+import RelatedPosts from "./RelatedPosts.astro";
 
 interface Props {
   post: any;
@@ -11,9 +12,10 @@ interface Props {
   previousPost?: any;
   nextPost?: any;
   hasBody?: boolean;
+  relatedPosts?: any[];
 }
 
-const { post, sectionLabel, listHref, previousPost, nextPost, hasBody = true } = Astro.props;
+const { post, sectionLabel, listHref, previousPost, nextPost, hasBody = true, relatedPosts = [] } = Astro.props;
 ---
 
 <article class="article-page">
@@ -45,6 +47,7 @@ const { post, sectionLabel, listHref, previousPost, nextPost, hasBody = true } =
           </ul>
         </section>
       )}
+      <RelatedPosts posts={relatedPosts} />
 
       <ArticleFooter
         tags={post.data.tags}

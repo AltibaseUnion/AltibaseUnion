@@ -7,9 +7,9 @@ author: "Altibase 노동조합"
 thumbnail: ""
 pinned: true
 tags:
-  - "활동보고"
-  - "7월"
   - "부당노동행위"
+  - "연대활동"
+  - "임원선거"
 draft: false
 slug: "july-activity-report"
 period: "2026년 7월"

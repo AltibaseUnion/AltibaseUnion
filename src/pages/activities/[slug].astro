@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ArticleLayout from "../../components/ArticleLayout.astro";
 import { sortPosts } from "../../data/site";
-import { getDescription } from "../../utils/content";
+import { getDescription, getRelatedPosts } from "../../utils/content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("activities", ({ data }) => !data.draft);
@@ -20,6 +20,7 @@ const posts = sortPosts(await getCollection("activities", ({ data }) => !data.dr
 const currentIndex = posts.findIndex((item) => item.data.slug === post.data.slug);
 const previousPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
 const nextPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : undefined;
+const relatedPosts = getRelatedPosts(post, [...await getCollection("notices", ({ data }) => !data.draft), ...posts]);
 ---
 
 <BaseLayout title={post.data.title} description={getDescription(post.data)}>
@@ -29,6 +30,7 @@ const nextPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[cu
     listHref={`${import.meta.env.BASE_URL}activities/`}
     previousPost={previousPost}
     nextPost={nextPost}
+    relatedPosts={relatedPosts}
   >
     <Content />
   </ArticleLayout>

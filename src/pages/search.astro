@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getDescription, getPostUrl } from "../utils/content";
+const posts = [...await getCollection("notices", ({ data }) => !data.draft), ...await getCollection("activities", ({ data }) => !data.draft)];
+const searchPosts = posts.map((post) => ({ title: post.data.title, description: getDescription(post.data), body: post.body.replace(/[#>*_`\[\]()!-]/g, " ").replace(/\s+/g, " ").trim(), tags: post.data.tags, category: post.data.category, date: post.data.date.toISOString(), url: getPostUrl(post.collection, post.data.slug) }));
+const serializedPosts = JSON.stringify(searchPosts).replace(/</g, "\\u003c");
+---
+<BaseLayout title="게시물 검색" description="공지사항과 활동보고를 통합 검색합니다.">
+  <section class="page-header"><div class="container"><h1>게시물 검색</h1><p>제목, 요약, 본문과 태그에서 필요한 정보를 찾아보세요.</p></div></section>
+  <section class="section-pad"><div class="container search-shell">
+    <form class="search-form" id="postSearchForm" role="search"><label for="searchQuery">검색어</label><div class="search-input-row"><input id="searchQuery" name="q" type="search" placeholder="예: 노사협의회, 임원선거" autocomplete="off" /><button class="btn btn-primary" type="submit"><i data-lucide="search" aria-hidden="true"></i>검색</button></div>
+      <fieldset class="search-filters"><legend>게시물 유형</legend><label><input type="radio" name="category" value="all" checked /> 전체</label><label><input type="radio" name="category" value="공지" /> 공지사항</label><label><input type="radio" name="category" value="활동보고" /> 활동보고</label></fieldset></form>
+    <p class="search-status" id="searchStatus" aria-live="polite">검색어를 입력해 주세요.</p><div class="search-results" id="searchResults"></div>
+  </div></section><script id="searchData" type="application/json" set:html={serializedPosts}></script>
+  <script>
+    const dataElement = document.querySelector("#searchData"), form = document.querySelector<HTMLFormElement>("#postSearchForm"), input = document.querySelector<HTMLInputElement>("#searchQuery"), status = document.querySelector<HTMLElement>("#searchStatus"), results = document.querySelector<HTMLElement>("#searchResults");
+    const posts = dataElement?.textContent ? JSON.parse(dataElement.textContent) : [];
+    const escapeHtml = (value: string) => value.replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character] ?? character);
+    const normalize = (value: string) => value.toLocaleLowerCase("ko-KR").replace(/\s+/g, " ").trim();
+    const runSearch = () => {
+      if (!form || !input || !status || !results) return;
+      const query = normalize(input.value), terms = query.split(" ").filter(Boolean), category = new FormData(form).get("category")?.toString() ?? "all", url = new URL(window.location.href);
+      query ? url.searchParams.set("q", input.value.trim()) : url.searchParams.delete("q"); category !== "all" ? url.searchParams.set("category", category) : url.searchParams.delete("category"); window.history.replaceState({}, "", url);
+      if (!terms.length) { status.textContent = "검색어를 입력해 주세요."; results.innerHTML = ""; return; }
+      const matches = posts.filter((post: any) => category === "all" || post.category === category).map((post: any) => {
+        const fields = { title: normalize(post.title), tags: normalize(post.tags.join(" ")), description: normalize(post.description), body: normalize(post.body) };
+        if (!terms.every((term) => Object.values(fields).some((field) => field.includes(term)))) return null;
+        return { ...post, score: terms.reduce((total, term) => total + (fields.title.includes(term) ? 5 : 0) + (fields.tags.includes(term) ? 4 : 0) + (fields.description.includes(term) ? 3 : 0) + (fields.body.includes(term) ? 1 : 0), 0) };
+      }).filter(Boolean).sort((a: any, b: any) => b.score - a.score || Date.parse(b.date) - Date.parse(a.date));
+      status.textContent = `검색 결과 ${matches.length}건`;
+      results.innerHTML = matches.length ? matches.map((post: any) => `<article class="search-result-card"><div class="content-meta"><span>${escapeHtml(post.category)}</span><span aria-hidden="true">·</span><time>${new Intl.DateTimeFormat("ko-KR").format(new Date(post.date))}</time></div><h2><a href="${escapeHtml(post.url)}">${escapeHtml(post.title)}</a></h2>${post.description ? `<p>${escapeHtml(post.description)}</p>` : ""}<div class="tag-list">${post.tags.map((tag: string) => `<span class="tag-badge">#${escapeHtml(tag)}</span>`).join("")}</div></article>`).join("") : `<div class="search-empty"><strong>일치하는 게시물이 없습니다.</strong><p>검색어를 줄이거나 다른 표현으로 검색해 보세요.</p></div>`;
+    };
+    if (form && input) { const params = new URLSearchParams(window.location.search); input.value = params.get("q") ?? ""; const category = params.get("category"), categoryInput = category ? form.querySelector<HTMLInputElement>(`input[value="${CSS.escape(category)}"]`) : null; if (categoryInput) categoryInput.checked = true; form.addEventListener("submit", (event) => { event.preventDefault(); runSearch(); }); form.addEventListener("change", runSearch); if (input.value) runSearch(); }
+  </script>
+</BaseLayout>

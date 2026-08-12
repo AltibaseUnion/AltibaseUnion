@@ -1,0 +1,16 @@
+---
+import { formatDate } from "../data/site";
+import { getDescription, getPostUrl } from "../utils/content";
+const { posts } = Astro.props;
+---
+{posts.length > 0 && (
+  <section class="related-posts" aria-labelledby="related-posts-heading">
+    <h2 id="related-posts-heading">관련 게시물</h2>
+    <div class="related-post-list">{posts.map((post: any) => (
+      <a class="related-post-card" href={getPostUrl(post.collection, post.data.slug)}>
+        <span>{post.data.category} · {formatDate(post.data.date)}</span><strong>{post.data.title}</strong>
+        {getDescription(post.data) && <p>{getDescription(post.data)}</p>}
+      </a>
+    ))}</div>
+  </section>
+)}
