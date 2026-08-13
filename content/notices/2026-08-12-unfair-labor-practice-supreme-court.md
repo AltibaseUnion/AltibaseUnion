@@ -9,8 +9,8 @@ tags:
   - 부당노동행위
   - 판결
 important: true
-thumbnail: https://www.scourt.go.kr/supreme/supreme.jsp
-thumbnailAlt: 대법원
+thumbnail: /AltibaseUnion/images/uploads/notices/대법원_대법정.jpg
+thumbnailAlt: "사진: 대법원 대법정"
 attachments: []
 draft: false
 ---
