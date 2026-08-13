@@ -10,7 +10,7 @@ tags:
   - 판결
 important: true
 thumbnail: /AltibaseUnion/images/uploads/notices/대법원_대법정.jpg
-thumbnailAlt: 대법원 대법정
+thumbnailAlt: "사진: 대법원 대법정"
 attachments: []
 draft: false
 ---
