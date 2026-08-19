@@ -10,7 +10,7 @@ tags:
   - 판결
   - 기사
 important: false
-thumbnail: /AltibaseUnion/images/uploads/notices/정의의여신상.jpg
+thumbnail: ""
 thumbnailAlt: 정의의 여신상
 attachments: []
 draft: false
