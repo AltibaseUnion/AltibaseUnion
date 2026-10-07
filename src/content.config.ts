@@ -1,12 +1,17 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+const optionalDate = z.preprocess(
+  (value) => value === "" || value === null ? undefined : value,
+  z.coerce.date().optional()
+);
+
 const commonPostSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
   summary: z.string().optional(),
   date: z.coerce.date(),
-  updatedDate: z.coerce.date().optional(),
+  updatedDate: optionalDate,
   category: z.string(),
   author: z.string().optional().default("Altibase 노동조합"),
   thumbnail: z.string().optional().default(""),

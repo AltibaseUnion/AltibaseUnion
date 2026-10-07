@@ -88,7 +88,7 @@ month: 6
 
 ### 2분기 정기 노사협의회 진행
 
-![2분기 정기 노사협의회 활동 이미지](/altibase-union-homepage/images/activities/2026-06-activity-report.png)
+![2분기 정기 노사협의회 활동 이미지](/AltibaseUnion/images/activities/2026-06-activity-report.png)
 
 ## 진행 중 현안
 

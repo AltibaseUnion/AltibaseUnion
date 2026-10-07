@@ -16,6 +16,8 @@
 
 대표 이미지와 본문 이미지는 각 컬렉션의 업로드 폴더에 저장됩니다. 공지는 `public/images/uploads/notices/`, 활동보고는 `public/images/uploads/activity-reports/`입니다. 공지 첨부파일은 표시 이름과 파일을 한 쌍으로 추가하며 `public/files/notices/`에 저장됩니다. 이미지 대체텍스트를 비우면 상세 페이지에서 글 제목을 사용합니다.
 
+이미지를 등록한 뒤에는 저장소의 `public/images/` 아래에 파일이 생성되었는지 확인합니다. `content/notices/public/` 또는 `content/activities/public/` 아래에 저장된 이미지는 배포되지 않는 잘못된 위치입니다. `npm run check`와 `npm run build`는 본문·대표 이미지의 실제 파일 존재 여부와 잘못된 업로드 위치를 자동 검사합니다.
+
 ## 5. 초안·검토·게시
 
 1. 글의 `초안`을 켠 채 저장합니다.

@@ -51,6 +51,16 @@
   CMS.registerPreviewTemplate("notices", Preview);
   CMS.registerPreviewTemplate("activities", Preview);
   CMS.registerEventListener({
+    name: "preSave",
+    handler: ({ entry }) => {
+      let data = entry.get("data");
+      ["updatedDate", "thumbnail", "thumbnailAlt"].forEach((field) => {
+        if (!String(data.get(field) ?? "").trim()) data = data.delete(field);
+      });
+      return data;
+    }
+  });
+  CMS.registerEventListener({
     name: "prePublish",
     handler: ({ entry }) => entry.get("data").set("draft", false)
   });
