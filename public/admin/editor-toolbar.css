@@ -1,0 +1,105 @@
+.cms-formatting-shortcuts {
+  align-items: center;
+  background: #f8faff;
+  border: 1px solid #d9e2ef;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 8px;
+}
+
+.cms-formatting-shortcuts__label {
+  color: #344054;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  margin: 0 4px;
+}
+
+.cms-formatting-shortcuts button {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #cbd6e5;
+  border-radius: 5px;
+  color: #182233;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  gap: 4px;
+  min-height: 30px;
+  padding: 4px 7px;
+}
+
+.cms-formatting-shortcuts button:hover,
+.cms-formatting-shortcuts button:focus-visible {
+  background: #eef4ff;
+  border-color: #174ea6;
+  color: #174ea6;
+  outline: none;
+}
+
+.cms-formatting-shortcuts__icon {
+  align-items: center;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 900;
+  height: 15px;
+  justify-content: center;
+  line-height: 1;
+  min-width: 15px;
+}
+
+.cms-formatting-shortcuts__status {
+  color: #667085;
+  font-size: 11px;
+  margin-left: auto;
+}
+
+.cms-extension-dialog {
+  background: rgba(15, 39, 71, 0.48);
+  display: grid;
+  inset: 0;
+  padding: 20px;
+  place-items: center;
+  position: fixed;
+  z-index: 100000;
+}
+
+.cms-extension-dialog__panel {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 18px 50px rgba(15, 39, 71, 0.24);
+  max-width: 460px;
+  padding: 24px;
+  width: 100%;
+}
+
+.cms-extension-dialog h2 { color: #0f2747; font-size: 20px; margin: 0 0 18px; }
+.cms-extension-dialog label { color: #344054; display: block; font-size: 13px; font-weight: 800; margin-top: 14px; }
+.cms-extension-dialog textarea,
+.cms-extension-dialog select {
+  border: 1px solid #b8c5d8;
+  border-radius: 6px;
+  display: block;
+  font: inherit;
+  margin-top: 6px;
+  min-height: 42px;
+  padding: 9px 10px;
+  width: 100%;
+}
+.cms-extension-dialog textarea { min-height: 100px; resize: vertical; }
+.cms-extension-dialog__actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
+.cms-extension-dialog__actions button { border: 1px solid #174ea6; border-radius: 6px; cursor: pointer; font-weight: 800; min-height: 38px; padding: 8px 14px; }
+.cms-extension-dialog__cancel { background: #fff; color: #174ea6; }
+.cms-extension-dialog__submit { background: #174ea6; color: #fff; }
+
+@media (max-width: 720px) {
+  .cms-formatting-shortcuts { gap: 4px; padding: 6px; }
+  .cms-formatting-shortcuts__label { flex-basis: 100%; }
+  .cms-formatting-shortcuts button { font-size: 10px; padding: 4px 6px; }
+  .cms-formatting-shortcuts__status { flex-basis: 100%; margin-left: 4px; }
+}
