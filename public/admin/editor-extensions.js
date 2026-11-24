@@ -189,15 +189,42 @@
   });
 
   const shortcuts = [
-    ["글자색", "A"], ["형광펜", "▰"], ["밑줄", "U"], ["가운데 정렬", "≡"], ["안내 박스", "!"],
-    ["표", "▦"], ["버튼 링크", "↗"], ["구분선", "—"], ["접기/펼치기", "⌄"], ["본문 이미지", "▧"], ["코드 블록", "</>"]
+    ["글자색", "A", "text-color"], ["형광펜", "▰", "highlight"], ["밑줄", "U", "underline"],
+    ["가운데 정렬", "≡", "align-center"], ["안내 박스", "!", "callout"], ["표", "▦", "table"],
+    ["버튼 링크", "↗", "button-link"], ["구분선", "—", "divider"], ["접기/펼치기", "⌄", "details"],
+    ["본문 이미지", "▧", "image"], ["코드 블록", "</>", "code"]
   ];
   const normalize = (text) => String(text || "").replace(/\s+/g, " ").trim();
   const isVisible = (element) => Boolean(element && (element.offsetWidth || element.offsetHeight || element.getClientRects().length));
-  const findAddButton = () => Array.from(document.querySelectorAll("button[title],button[aria-label]")).find((button) => {
-    const label = `${button.title || ""} ${button.getAttribute("aria-label") || ""}`.toLowerCase();
-    return label.includes("component") || label.includes("컴포넌트") || label.includes("구성 요소");
-  });
+  function findAddButton() {
+    const remembered = document.querySelector("button.cms-component-menu-proxy");
+    if (remembered) return remembered;
+
+    const buttons = Array.from(document.querySelectorAll("button")).filter((button) =>
+      isVisible(button) && !button.closest(".cms-formatting-shortcuts")
+    );
+    const labelled = buttons.find((button) => {
+      const label = `${button.title || ""} ${button.getAttribute("aria-label") || ""}`.toLowerCase();
+      return label.includes("component") || label.includes("컴포넌트") || label.includes("구성 요소");
+    });
+    if (labelled) return labelled;
+
+    const literalPlus = buttons.find((button) => ["+", "＋"].includes(normalize(button.textContent)));
+    if (literalPlus) return literalPlus;
+
+    const toolbarGroups = new Map();
+    buttons.forEach((button) => {
+      const toolbar = findToolbar(button);
+      if (!toolbar) return;
+      const group = toolbarGroups.get(toolbar) || [];
+      group.push(button);
+      toolbarGroups.set(toolbar, group);
+    });
+    const likelyToolbar = Array.from(toolbarGroups.entries())
+      .filter(([, group]) => group.length >= 7)
+      .sort((left, right) => right[1].length - left[1].length)[0];
+    return likelyToolbar?.[1].at(-1) || null;
+  }
   const findToolbar = (button) => {
     let node = button?.parentElement;
     while (node && node !== document.body) {
@@ -221,35 +248,33 @@
   function mountShortcutToolbar() {
     const addButton = findAddButton();
     const toolbar = findToolbar(addButton);
-    if (!toolbar || toolbar.parentElement?.querySelector(":scope > .cms-formatting-shortcuts")) return;
+    if (!toolbar || toolbar.querySelector(":scope > .cms-formatting-shortcuts")) return;
     const bar = document.createElement("div");
     bar.className = "cms-formatting-shortcuts";
     bar.setAttribute("role", "toolbar");
     bar.setAttribute("aria-label", "확장 서식 도구");
-    const label = document.createElement("span");
-    label.className = "cms-formatting-shortcuts__label";
-    label.textContent = "확장 서식";
-    bar.appendChild(label);
     const status = document.createElement("span");
     status.className = "cms-formatting-shortcuts__status";
     status.setAttribute("aria-live", "polite");
-    shortcuts.forEach(([name, icon]) => {
+    shortcuts.forEach(([name, icon, kind]) => {
       const button = document.createElement("button");
       button.type = "button";
+      button.className = `cms-formatting-shortcuts__button cms-formatting-shortcuts__button--${kind}`;
       button.title = name;
       button.setAttribute("aria-label", name);
       const iconNode = document.createElement("span");
       iconNode.className = "cms-formatting-shortcuts__icon";
       iconNode.setAttribute("aria-hidden", "true");
       iconNode.textContent = icon;
-      const textNode = document.createElement("span");
-      textNode.textContent = name;
-      button.append(iconNode, textNode);
+      button.append(iconNode);
       button.addEventListener("click", () => activateComponent(name, status));
       bar.appendChild(button);
     });
     bar.appendChild(status);
-    toolbar.parentElement.insertBefore(bar, toolbar);
+    addButton.classList.add("cms-component-menu-proxy");
+    addButton.setAttribute("aria-hidden", "true");
+    addButton.tabIndex = -1;
+    toolbar.insertBefore(bar, addButton);
   }
   let scheduled = false;
   const scheduleMount = () => {
