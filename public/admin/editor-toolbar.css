@@ -33,5 +33,6 @@
 .cms-extension-dialog textarea { min-height: 100px; resize: vertical; }
 .cms-extension-dialog__actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
 .cms-extension-dialog__actions button { border: 1px solid #174ea6; border-radius: 6px; cursor: pointer; font-weight: 800; min-height: 38px; padding: 8px 14px; }
+.cms-extension-dialog__remove { background: #fff; border-color: #b42318 !important; color: #b42318; margin-right: auto; }
 .cms-extension-dialog__cancel { background: #fff; color: #174ea6; }
 .cms-extension-dialog__submit { background: #174ea6; color: #fff; }
