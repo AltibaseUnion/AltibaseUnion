@@ -26,7 +26,7 @@
   ];
   const highlights = [["yellow", "노란색"], ["blue", "파란색"], ["green", "녹색"]];
 
-  function showInlineDialog({ title, selectedText = "", choices = [], initialStyle = "" }) {
+  function showInlineDialog({ title, selectedText = "", choices = [], initialStyle = "", allowRemove = false }) {
     return new Promise((resolve) => {
       const overlay = document.createElement("div");
       overlay.className = "cms-extension-dialog";
@@ -71,6 +71,14 @@
       cancel.type = "button";
       cancel.className = "cms-extension-dialog__cancel";
       cancel.textContent = "취소";
+      if (allowRemove) {
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "cms-extension-dialog__remove";
+        remove.textContent = "서식 해제";
+        remove.addEventListener("click", () => close({ text: textarea.value, remove: true }));
+        actions.appendChild(remove);
+      }
       const submit = document.createElement("button");
       submit.type = "submit";
       submit.className = "cms-extension-dialog__submit";
@@ -96,29 +104,29 @@
   CMS.registerEditorComponent({
     id: "text-color", label: "글자색", type: "inline", trigger: '<span class="article-text-',
     pattern: /<span class="article-text-(navy|blue|teal|green|amber|red|burgundy|muted)">(.*?)<\/span>/,
-    fromInline: (match) => ({ tone: match[1], text: decodeHtml(match[2]) }),
-    toInline: ({ tone, text }) => `<span class="article-text-${tone}">${escapeHtml(text)}</span>`,
-    toPreview: ({ tone, text }) => h("span", { className: `article-text-${tone}` }, text),
+    fromInline: (match) => ({ tone: match[1], text: decodeHtml(match[2]), remove: false }),
+    toInline: ({ tone, text, remove }) => remove ? text : `<span class="article-text-${tone}">${escapeHtml(text)}</span>`,
+    toPreview: ({ tone, text, remove }) => remove ? text : h("span", { className: `article-text-${tone}` }, text),
     onInsert: ({ selectedText }) => showInlineDialog({ title: "글자색 적용", selectedText, choices: textColors }).then((data) => data && ({ tone: data.style, text: data.text })),
-    onEdit: ({ data }) => showInlineDialog({ title: "글자색 수정", selectedText: data.text, choices: textColors, initialStyle: data.tone }).then((next) => next && ({ tone: next.style, text: next.text }))
+    onEdit: ({ data }) => showInlineDialog({ title: "글자색 수정", selectedText: data.text, choices: textColors, initialStyle: data.tone, allowRemove: true }).then((next) => next && (next.remove ? { text: next.text, remove: true } : { tone: next.style, text: next.text }))
   });
   CMS.registerEditorComponent({
     id: "text-highlight", label: "형광펜", type: "inline", trigger: '<mark class="article-highlight-',
     pattern: /<mark class="article-highlight-(yellow|blue|green)">(.*?)<\/mark>/,
-    fromInline: (match) => ({ tone: match[1], text: decodeHtml(match[2]) }),
-    toInline: ({ tone, text }) => `<mark class="article-highlight-${tone}">${escapeHtml(text)}</mark>`,
-    toPreview: ({ tone, text }) => h("mark", { className: `article-highlight-${tone}` }, text),
+    fromInline: (match) => ({ tone: match[1], text: decodeHtml(match[2]), remove: false }),
+    toInline: ({ tone, text, remove }) => remove ? text : `<mark class="article-highlight-${tone}">${escapeHtml(text)}</mark>`,
+    toPreview: ({ tone, text, remove }) => remove ? text : h("mark", { className: `article-highlight-${tone}` }, text),
     onInsert: ({ selectedText }) => showInlineDialog({ title: "형광펜 적용", selectedText, choices: highlights }).then((data) => data && ({ tone: data.style, text: data.text })),
-    onEdit: ({ data }) => showInlineDialog({ title: "형광펜 수정", selectedText: data.text, choices: highlights, initialStyle: data.tone }).then((next) => next && ({ tone: next.style, text: next.text }))
+    onEdit: ({ data }) => showInlineDialog({ title: "형광펜 수정", selectedText: data.text, choices: highlights, initialStyle: data.tone, allowRemove: true }).then((next) => next && (next.remove ? { text: next.text, remove: true } : { tone: next.style, text: next.text }))
   });
   CMS.registerEditorComponent({
     id: "text-underline", label: "밑줄", type: "inline", trigger: '<span class="article-underline">',
     pattern: /<span class="article-underline">(.*?)<\/span>/,
-    fromInline: (match) => ({ text: decodeHtml(match[1]) }),
-    toInline: ({ text }) => `<span class="article-underline">${escapeHtml(text)}</span>`,
-    toPreview: ({ text }) => h("span", { className: "article-underline" }, text),
+    fromInline: (match) => ({ text: decodeHtml(match[1]), remove: false }),
+    toInline: ({ text, remove }) => remove ? text : `<span class="article-underline">${escapeHtml(text)}</span>`,
+    toPreview: ({ text, remove }) => remove ? text : h("span", { className: "article-underline" }, text),
     onInsert: ({ selectedText }) => showInlineDialog({ title: "밑줄 적용", selectedText }).then((data) => data && ({ text: data.text })),
-    onEdit: ({ data }) => showInlineDialog({ title: "밑줄 수정", selectedText: data.text }).then((next) => next && ({ text: next.text }))
+    onEdit: ({ data }) => showInlineDialog({ title: "밑줄 수정", selectedText: data.text, allowRemove: true }).then((next) => next && ({ text: next.text, remove: Boolean(next.remove) }))
   });
   CMS.registerEditorComponent({
     id: "centered-text", label: "가운데 정렬", fields: [{ name: "text", label: "문구", widget: "string" }],
