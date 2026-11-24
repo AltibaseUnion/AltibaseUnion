@@ -196,6 +196,24 @@
   ];
   const normalize = (text) => String(text || "").replace(/\s+/g, " ").trim();
   const isVisible = (element) => Boolean(element && (element.offsetWidth || element.offsetHeight || element.getClientRects().length));
+  let toolbarHint = null;
+  const commonAncestor = (elements) => {
+    if (!elements.length) return null;
+    let ancestor = elements[0].parentElement;
+    while (ancestor && !elements.every((element) => ancestor.contains(element))) ancestor = ancestor.parentElement;
+    return ancestor;
+  };
+  const groupButtonsByRow = (buttons) => {
+    const rows = [];
+    buttons.forEach((button) => {
+      const rect = button.getBoundingClientRect();
+      if (!rect.width || !rect.height || rect.height > 60 || rect.width > 90) return;
+      let row = rows.find((candidate) => Math.abs(candidate.top - rect.top) <= 5);
+      if (!row) { row = { top: rect.top, buttons: [] }; rows.push(row); }
+      row.buttons.push(button);
+    });
+    return rows;
+  };
   function findAddButton() {
     const remembered = document.querySelector("button.cms-component-menu-proxy");
     if (remembered) return remembered;
@@ -212,6 +230,15 @@
     const literalPlus = buttons.find((button) => ["+", "＋"].includes(normalize(button.textContent)));
     if (literalPlus) return literalPlus;
 
+    const visualRow = groupButtonsByRow(buttons)
+      .filter((row) => row.buttons.length >= 7)
+      .sort((left, right) => right.buttons.length - left.buttons.length)[0];
+    if (visualRow) {
+      visualRow.buttons.sort((left, right) => left.getBoundingClientRect().left - right.getBoundingClientRect().left);
+      toolbarHint = commonAncestor(visualRow.buttons);
+      return visualRow.buttons.at(-1);
+    }
+
     const toolbarGroups = new Map();
     buttons.forEach((button) => {
       const toolbar = findToolbar(button);
@@ -226,6 +253,7 @@
     return likelyToolbar?.[1].at(-1) || null;
   }
   const findToolbar = (button) => {
+    if (toolbarHint?.isConnected && toolbarHint.contains(button)) return toolbarHint;
     let node = button?.parentElement;
     while (node && node !== document.body) {
       if (node.querySelectorAll("button").length >= 5 && node.getBoundingClientRect().height < 150) return node;
@@ -271,10 +299,15 @@
       bar.appendChild(button);
     });
     bar.appendChild(status);
+    let anchor = addButton;
+    while (anchor.parentElement && anchor.parentElement !== toolbar && toolbar.contains(anchor.parentElement)) {
+      anchor = anchor.parentElement;
+    }
+    if (anchor.parentElement !== toolbar) return;
+    toolbar.insertBefore(bar, anchor);
     addButton.classList.add("cms-component-menu-proxy");
     addButton.setAttribute("aria-hidden", "true");
     addButton.tabIndex = -1;
-    toolbar.insertBefore(bar, addButton);
   }
   let scheduled = false;
   const scheduleMount = () => {
